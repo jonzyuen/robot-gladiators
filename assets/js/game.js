@@ -1,5 +1,6 @@
+// game functions
 
-
+// rng 
 var randomNumber = function(min, max) {
   var value = Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -21,7 +22,7 @@ var fight = function(enemy) {
       if (confirmSkip) {
         window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
         // penalty for skipping
-        playerInfo.money = playerInfo.money - 10;
+        playerInfo.money = Math.max(0, playerInfo.money -10);
         console.log("playerInfo.money", playerInfo.money);
         break;
       }
@@ -60,7 +61,7 @@ var fight = function(enemy) {
       window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.");
     }
   }
-}
+};
 
 // fight robot loop, one at a time
 var startGame = function() {
@@ -99,7 +100,7 @@ var startGame = function() {
   
   // after loop ends, we are either dead or they are dead, so run endGame
   endGame();
-}
+};
 
 // end the game 
 var endGame = function() {
@@ -120,7 +121,7 @@ var endGame = function() {
   } else {
     window.alert("Thank you for playing Robot Gladiators! Come back soon!");
   }
-}
+};
 
 // shop between battles function 
 var shop = function() {
@@ -154,13 +155,24 @@ var shop = function() {
       shop();
       break;
   }
-}
+};
+
+var getPlayerName = function() {
+  var name = "";
+  while (name === "" || name === null) {
+    name = prompt("What is your robot's name?");
+  }
+  console.log("Your robot's name is " + name);
+  return name;
+};
 
 // variables start 
 
 // player info 
+
+
 var playerInfo = {
-  name: window.prompt("What is your robot's name?"),
+  name: getPlayerName(),
   health: 100,
   attack: 10,
   money: 10,
@@ -187,7 +199,7 @@ var playerInfo = {
       window.alert("You don't have enough money!");
     }
   }
-}
+};
 
 // enemy info 
 var enemyInfo = [
